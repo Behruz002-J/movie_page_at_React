@@ -26,6 +26,7 @@ const [page,setPage] = useState(1)
   function chosenAction(chosenAction) {
     window.localStorage.setItem("action",chosenAction)
     setAction(chosenAction)
+    setPage(1)
   }
 
   
