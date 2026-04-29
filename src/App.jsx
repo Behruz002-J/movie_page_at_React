@@ -1,7 +1,7 @@
 import axios from "axios";
-
 import { useEffect, useState } from "react";
 import MovieType from "./components/UserMovie";
+import PageMain from "./components/Pagemain";
 
 export default function App() {
   let API_KEY = "dcea1fd7b3e65d34387ad6de7ef9cc5e";
@@ -9,10 +9,11 @@ export default function App() {
   // const [users, setUsers] = useState([]);
 const [action,setAction] = useState("top_rated")
 const [movies,setMovies] = useState([])
+const [page,setPage] = useState(1)
 
   useEffect(() => {
-    const action = window.localStorage.getItem("action")
-    const apiUrl = `https://api.themoviedb.org/3/movie/${action}?api_key=${API_KEY}`;
+    const action = window.localStorage.getItem("action") || "top_rated"
+    const apiUrl = `https://api.themoviedb.org/3/movie/${action}?api_key=${API_KEY}&page=${page}`;
     console.log(apiUrl);
     
      async function fetchData() {
@@ -20,7 +21,7 @@ const [movies,setMovies] = useState([])
     setMovies(data.data.results)
     }
     fetchData();
-  }, [action,movies]);
+  }, [action,page]);
 
   function chosenAction(chosenAction) {
     window.localStorage.setItem("action",chosenAction)
@@ -72,11 +73,7 @@ const [movies,setMovies] = useState([])
 
         <div className="container">
          <MovieType movies = {movies} />
-          <div className="pn">
-            <button className="prev">prev</button>
-            <span className="title">1</span>
-            <button className="next">next</button>
-          </div>
+          <PageMain page={page} setPage={setPage} />
         </div>
       </div>
     </>

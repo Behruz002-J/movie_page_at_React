@@ -4,9 +4,11 @@ import './index.css'
 import App from './App.jsx'
 import './App.css'
 import MovieType from './components/UserMovie.jsx'
+import PageMain  from './components/Pagemain.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
     <MovieType />
+    <PageMain />
   </StrictMode>,
 )
